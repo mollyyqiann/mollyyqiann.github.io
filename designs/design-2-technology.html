@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Technology — Infinite Exploration</title>
+<style>
+  :root{
+    --bg:#faf8f4;
+    --bg-2:#f2ede4;
+    --card:#ffffff;
+    --line:#e4ddd0;
+    --text:#20201d;
+    --text-dim:#6b6459;
+    --accent:#9c6b3e;
+    --accent-soft:#e8dcc8;
+    --slate:#5c6b73;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{background:var(--bg);color:var(--text);font-family:Georgia,"Iowan Old Style","Palatino Linotype",serif;line-height:1.6;}
+  .sans{font-family:-apple-system,BlinkMacSystemFont,"Helvetica Neue",Arial,sans-serif;}
+  a{color:inherit;text-decoration:none;}
+  .wrap{max-width:1180px;margin:0 auto;padding:0 40px;}
+
+  nav{border-bottom:1px solid var(--line);}
+  nav .wrap{display:flex;align-items:center;justify-content:space-between;height:96px;}
+  .logo{font-size:20px;letter-spacing:0.01em;}
+  .navlinks{display:flex;gap:44px;font-size:14px;color:var(--text-dim);}
+  .navlinks a:hover, .navlinks a.active{color:var(--text);}
+  .nav-cta{border:1px solid var(--text);color:var(--text);padding:10px 22px;border-radius:2px;font-size:13px;letter-spacing:0.04em;text-transform:uppercase;}
+  .nav-cta:hover{background:var(--text);color:var(--bg);}
+
+  .page-hero{padding:120px 0 80px;}
+  .page-hero-inner{max-width:760px;}
+  .eyebrow{font-size:13px;letter-spacing:0.14em;text-transform:uppercase;color:var(--accent);margin-bottom:28px;font-family:-apple-system,BlinkMacSystemFont,"Helvetica Neue",Arial,sans-serif;}
+  h1{font-size:clamp(34px,5vw,52px);font-weight:400;line-height:1.15;margin-bottom:24px;letter-spacing:-0.01em;}
+  h1 em{font-style:italic;color:var(--accent);}
+  .page-hero-sub{font-size:19px;color:var(--text-dim);max-width:600px;}
+
+  section{padding:100px 0;}
+  .section-head{max-width:640px;margin-bottom:56px;}
+  .section-tag{font-size:13px;letter-spacing:0.14em;text-transform:uppercase;color:var(--accent);margin-bottom:18px;font-family:-apple-system,BlinkMacSystemFont,"Helvetica Neue",Arial,sans-serif;}
+  h2{font-size:clamp(28px,3.5vw,38px);font-weight:400;letter-spacing:-0.01em;margin-bottom:20px;}
+  .section-desc{color:var(--text-dim);font-size:17px;font-family:-apple-system,BlinkMacSystemFont,"Helvetica Neue",Arial,sans-serif;}
+
+  .intro-grid{display:grid;grid-template-columns:1.1fr 0.9fr;gap:80px;align-items:center;}
+  .intro-photo{aspect-ratio:4/3;background:linear-gradient(150deg, #cfd7d6 0%, #eee7da 55%, #d8cdb8 100%);}
+  .intro-text p{color:var(--text-dim);font-size:18px;margin-bottom:18px;font-family:-apple-system,BlinkMacSystemFont,"Helvetica Neue",Arial,sans-serif;}
+
+  .shaded{background:var(--bg-2);}
+
+  .tri-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line);}
+  .tri-card{background:var(--bg-2);padding:44px 32px;}
+  .tri-index{font-family:-apple-system,BlinkMacSystemFont,"Helvetica Neue",Arial,sans-serif;font-size:12px;color:var(--accent);letter-spacing:0.08em;margin-bottom:24px;}
+  .tri-card h3{font-size:21px;font-weight:400;margin-bottom:14px;}
+  .tri-card p{font-size:15px;color:var(--text-dim);font-family:-apple-system,BlinkMacSystemFont,"Helvetica Neue",Arial,sans-serif;}
+
+  .scale-row{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border-top:1px solid var(--line);}
+  .scale-item{padding:28px 24px 0;border-right:1px solid var(--line);}
+  .scale-item:last-child{border-right:none;}
+  .scale-kw{font-size:26px;color:var(--accent);margin-bottom:10px;}
+  .scale-item h4{font-size:17px;font-weight:400;margin-bottom:10px;}
+  .scale-item p{font-size:14px;color:var(--text-dim);font-family:-apple-system,BlinkMacSystemFont,"Helvetica Neue",Arial,sans-serif;}
+
+  .app-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:1px;background:var(--line);border:1px solid var(--line);}
+  .app-card{background:var(--card);padding:32px 22px;}
+  .app-card h4{font-size:16px;font-weight:400;margin-bottom:10px;}
+  .app-card p{font-size:13px;color:var(--text-dim);font-family:-apple-system,BlinkMacSystemFont,"Helvetica Neue",Arial,sans-serif;}
+
+  .why-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:48px;}
+  .why-item{border-top:1px solid var(--line);padding-top:24px;}
+  .why-item h3{font-size:19px;font-weight:400;margin-bottom:12px;}
+  .why-item p{color:var(--text-dim);font-size:15px;font-family:-apple-system,BlinkMacSystemFont,"Helvetica Neue",Arial,sans-serif;}
+
+  .cta-row{display:flex;gap:20px;flex-wrap:wrap;}
+  .btn-primary{background:var(--text);color:var(--bg);padding:15px 30px;font-size:13px;letter-spacing:0.06em;text-transform:uppercase;font-family:-apple-system,BlinkMacSystemFont,"Helvetica Neue",Arial,sans-serif;}
+  .btn-secondary{border-bottom:1px solid var(--text);padding:15px 4px;font-size:13px;letter-spacing:0.06em;text-transform:uppercase;font-family:-apple-system,BlinkMacSystemFont,"Helvetica Neue",Arial,sans-serif;}
+  .final-cta{text-align:center;}
+  .final-cta .section-head{margin:0 auto 40px;text-align:center;}
+  .final-cta .cta-row{justify-content:center;}
+
+  footer{border-top:1px solid var(--line);padding:56px 0;}
+  footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:16px;font-family:-apple-system,BlinkMacSystemFont,"Helvetica Neue",Arial,sans-serif;font-size:13px;color:var(--text-dim);}
+
+  @media (max-width:900px){
+    .intro-grid, .why-grid{grid-template-columns:1fr 1fr;}
+    .tri-grid, .scale-row{grid-template-columns:1fr 1fr;}
+    .app-grid{grid-template-columns:1fr 1fr 1fr;}
+    .navlinks{display:none;}
+  }
+  @media (max-width:600px){
+    .intro-grid, .why-grid, .tri-grid, .scale-row, .app-grid{grid-template-columns:1fr;}
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap sans">
+    <a href="design-2-premium-minimal.html" class="logo">Infinite Exploration</a>
+    <div class="navlinks">
+      <a href="design-2-technology.html" class="active">Technology</a>
+      <a href="design-2-about.html">About</a>
+      <a href="design-2-news.html">News</a>
+      <a href="design-2-contact.html">Contact</a>
+    </div>
+    <a href="design-2-contact.html" class="nav-cta">Investor Deck</a>
+  </div>
+</nav>
+
+<section class="page-hero">
+  <div class="wrap page-hero-inner">
+    <div class="eyebrow">The Platform</div>
+    <h1>One <em>system</em>, four outputs, continuous power</h1>
+    <p class="page-hero-sub sans">AI coordinates solar generation, electrolysis, fuel cells, and thermal management as a single regenerative cycle &mdash; enabling power, hydrogen, oxygen, and water production anywhere on the lunar surface.</p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap intro-grid">
+    <div class="intro-text">
+      <div class="section-tag">Regenerative Energy Cycle</div>
+      <h2>Storage and production, in one loop</h2>
+      <p>During lunar day, solar arrays generate more power than a payload needs. Rather than dumping that excess, our platform routes it into an electrolyzer, splitting stored water into hydrogen and oxygen.</p>
+      <p>Through the 14-day lunar night, that hydrogen and oxygen run back through a fuel cell to generate continuous power &mdash; producing water as a byproduct that feeds back into the cycle. Nothing is a dead end; every output becomes an input somewhere else in the system.</p>
+    </div>
+    <div class="intro-photo"></div>
+  </div>
+</section>
+
+<section class="shaded">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="section-tag">AI-Driven Management</div>
+      <h2>Software decides how the cycle runs</h2>
+      <p class="section-desc">The physical hardware is only half the system. An onboard AI continuously models power demand, thermal load, and consumable reserves, then decides in real time how much to store, produce, or discharge.</p>
+    </div>
+    <div class="why-grid">
+      <div class="why-item">
+        <h3>Predictive load balancing</h3>
+        <p>Anticipates a payload's power draw ahead of the lunar night, adjusting electrolysis rates so reserves are never over- or under-built.</p>
+      </div>
+      <div class="why-item">
+        <h3>Autonomous fault response</h3>
+        <p>Detects component degradation or thermal anomalies and reroutes the cycle automatically, without waiting on ground control.</p>
+      </div>
+      <div class="why-item">
+        <h3>Mission-specific tuning</h3>
+        <p>The same control software adapts to a rover's short bursts of demand or a habitat's steady baseline load, without new hardware.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="section-head">
+      <div class="section-tag">Core Technologies</div>
+      <h2>The hardware underneath the cycle</h2>
+      <p class="section-desc">Fuel cells and electrolyzers are the enabling technologies &mdash; not the product. The product is the system that coordinates them.</p>
+    </div>
+  </div>
+  <div class="wrap" style="padding:0;">
+    <div class="tri-grid">
+      <div class="tri-card">
+        <div class="tri-index">01</div>
+        <h3>Fuel Cell</h3>
+        <p>Converts stored hydrogen and oxygen back into electrical power through the lunar night, with water as a recoverable byproduct.</p>
+      </div>
+      <div class="tri-card">
+        <div class="tri-index">02</div>
+        <h3>Electrolyzer</h3>
+        <p>Splits water into hydrogen and oxygen using surplus solar power during the lunar day, charging the system for the night ahead.</p>
+      </div>
+      <div class="tri-card">
+        <div class="tri-index">03</div>
+        <h3>Thermal Management</h3>
+        <p>Regulates extreme swings between lunar day and night so the fuel cell, electrolyzer, and storage tanks stay within operating range.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="shaded">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="section-tag">Modular Architecture</div>
+      <h2>From 1 kW to MW scale</h2>
+      <p class="section-desc">The same regenerative cycle scales by adding modules, not by redesigning the system &mdash; from a single rover to a full outpost.</p>
+    </div>
+  </div>
+  <div class="wrap" style="padding:0;">
+    <div class="scale-row">
+      <div class="scale-item">
+        <div class="scale-kw">1 kW</div>
+        <h4>Rover platforms</h4>
+        <p>Compact modules sized for mobile, low-mass payloads.</p>
+      </div>
+      <div class="scale-item">
+        <div class="scale-kw">10 kW</div>
+        <h4>Landers &amp; instruments</h4>
+        <p>Sustains science payloads through extended lunar nights.</p>
+      </div>
+      <div class="scale-item">
+        <div class="scale-kw">100 kW</div>
+        <h4>Habitats</h4>
+        <p>Steady baseline power for crewed or semi-permanent structures.</p>
+      </div>
+      <div class="scale-item">
+        <div class="scale-kw">MW</div>
+        <h4>Outposts &amp; ISRU sites</h4>
+        <p>Industrial-scale power for resource extraction and processing.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="section-head">
+      <div class="section-tag">Applications</div>
+      <h2>Built for what comes next on the Moon</h2>
+    </div>
+  </div>
+  <div class="wrap" style="padding:0;">
+    <div class="app-grid">
+      <div class="app-card">
+        <h4>Rovers</h4>
+        <p>Lightweight, mobile power that survives extended shadowed traverses.</p>
+      </div>
+      <div class="app-card">
+        <h4>Habitats</h4>
+        <p>Continuous baseline power and life-support consumables in one system.</p>
+      </div>
+      <div class="app-card">
+        <h4>ISRU</h4>
+        <p>Industrial power for resource extraction and in-situ processing.</p>
+      </div>
+      <div class="app-card">
+        <h4>Defense</h4>
+        <p>Resilient, autonomous power for contested or unsupported environments.</p>
+      </div>
+      <div class="app-card">
+        <h4>Science</h4>
+        <p>Reliable power through the night for instruments and long-duration experiments.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="shaded">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="section-tag">Why This, Not Existing Solutions</div>
+      <h2>Advantages over the status quo</h2>
+    </div>
+    <div class="why-grid">
+      <div class="why-item">
+        <h3>vs. Battery-only systems</h3>
+        <p>Batteries alone can't carry a payload through a 14-day lunar night at reasonable mass. Our cycle regenerates power instead of only storing it.</p>
+      </div>
+      <div class="why-item">
+        <h3>vs. Single-output power systems</h3>
+        <p>Most power systems deliver electricity alone. Ours produces hydrogen, oxygen, and water as part of the same cycle, at no added mass.</p>
+      </div>
+      <div class="why-item">
+        <h3>vs. Mission-specific power design</h3>
+        <p>Instead of a custom power solution per mission, our modular architecture scales across rovers, habitats, and ISRU sites without redesign.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="final-cta">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>See the full technical specification</h2>
+    </div>
+    <div class="cta-row">
+      <a href="design-2-contact.html" class="btn-primary">Request Investor Deck</a>
+      <a href="design-2-contact.html" class="btn-secondary">Contact Us &rarr;</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div>&copy; 2026 Infinite Exploration</div>
+    <div>Technology &mdash; Premium Minimalist</div>
+  </div>
+</footer>
+
+</body>
+</html>

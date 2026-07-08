@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About — Infinite Exploration</title>
+<style>
+  :root{
+    --bg:#faf8f4;
+    --bg-2:#f2ede4;
+    --card:#ffffff;
+    --line:#e4ddd0;
+    --text:#20201d;
+    --text-dim:#6b6459;
+    --accent:#9c6b3e;
+    --accent-soft:#e8dcc8;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{background:var(--bg);color:var(--text);font-family:Georgia,"Iowan Old Style","Palatino Linotype",serif;line-height:1.6;}
+  .sans{font-family:-apple-system,BlinkMacSystemFont,"Helvetica Neue",Arial,sans-serif;}
+  a{color:inherit;text-decoration:none;}
+  .wrap{max-width:1180px;margin:0 auto;padding:0 40px;}
+
+  nav{border-bottom:1px solid var(--line);}
+  nav .wrap{display:flex;align-items:center;justify-content:space-between;height:96px;}
+  .logo{font-size:20px;letter-spacing:0.01em;}
+  .navlinks{display:flex;gap:44px;font-size:14px;color:var(--text-dim);}
+  .navlinks a:hover, .navlinks a.active{color:var(--text);}
+  .nav-cta{border:1px solid var(--text);color:var(--text);padding:10px 22px;border-radius:2px;font-size:13px;letter-spacing:0.04em;text-transform:uppercase;}
+  .nav-cta:hover{background:var(--text);color:var(--bg);}
+
+  .page-hero{padding:120px 0 80px;}
+  .page-hero-inner{max-width:760px;}
+  .eyebrow{font-size:13px;letter-spacing:0.14em;text-transform:uppercase;color:var(--accent);margin-bottom:28px;font-family:-apple-system,BlinkMacSystemFont,"Helvetica Neue",Arial,sans-serif;}
+  h1{font-size:clamp(34px,5vw,52px);font-weight:400;line-height:1.15;margin-bottom:24px;letter-spacing:-0.01em;}
+  h1 em{font-style:italic;color:var(--accent);}
+  .page-hero-sub{font-size:19px;color:var(--text-dim);max-width:600px;}
+
+  section{padding:100px 0;}
+  .section-head{max-width:640px;margin-bottom:56px;}
+  .section-tag{font-size:13px;letter-spacing:0.14em;text-transform:uppercase;color:var(--accent);margin-bottom:18px;font-family:-apple-system,BlinkMacSystemFont,"Helvetica Neue",Arial,sans-serif;}
+  h2{font-size:clamp(28px,3.5vw,38px);font-weight:400;letter-spacing:-0.01em;margin-bottom:20px;}
+  .section-desc{color:var(--text-dim);font-size:17px;font-family:-apple-system,BlinkMacSystemFont,"Helvetica Neue",Arial,sans-serif;}
+
+  .shaded{background:var(--bg-2);}
+
+  .story-grid{display:grid;grid-template-columns:1.1fr 0.9fr;gap:80px;align-items:center;}
+  .story-photo{aspect-ratio:4/3;background:linear-gradient(150deg, #cfd7d6 0%, #eee7da 55%, #d8cdb8 100%);}
+  .story-text p{color:var(--text-dim);font-size:18px;margin-bottom:18px;font-family:-apple-system,BlinkMacSystemFont,"Helvetica Neue",Arial,sans-serif;}
+
+  .team-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:32px;}
+  .team-card{}
+  .team-photo{aspect-ratio:1/1;background:linear-gradient(160deg,#dcd3c3,#cdd7d6);margin-bottom:20px;}
+  .team-name{font-size:18px;margin-bottom:4px;}
+  .team-title{font-size:13px;color:var(--accent);text-transform:uppercase;letter-spacing:0.05em;margin-bottom:10px;font-family:-apple-system,BlinkMacSystemFont,"Helvetica Neue",Arial,sans-serif;}
+  .team-bio{font-size:14px;color:var(--text-dim);font-family:-apple-system,BlinkMacSystemFont,"Helvetica Neue",Arial,sans-serif;}
+
+  .advisor-list{display:grid;grid-template-columns:repeat(3,1fr);gap:48px;}
+  .advisor-item{border-top:1px solid var(--line);padding-top:24px;}
+  .advisor-item h3{font-size:17px;font-weight:400;margin-bottom:6px;}
+  .advisor-item .role{font-size:13px;color:var(--accent);text-transform:uppercase;letter-spacing:0.04em;margin-bottom:10px;font-family:-apple-system,BlinkMacSystemFont,"Helvetica Neue",Arial,sans-serif;}
+  .advisor-item p{font-size:14px;color:var(--text-dim);font-family:-apple-system,BlinkMacSystemFont,"Helvetica Neue",Arial,sans-serif;}
+
+  .expertise-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border:1px solid var(--line);}
+  .expertise-card{background:var(--card);padding:36px 26px;}
+  .expertise-card h4{font-size:17px;font-weight:400;margin-bottom:10px;}
+  .expertise-card p{font-size:14px;color:var(--text-dim);font-family:-apple-system,BlinkMacSystemFont,"Helvetica Neue",Arial,sans-serif;}
+
+  .logo-row{display:flex;flex-wrap:wrap;gap:24px;}
+  .partner-slot{
+    flex:1 1 200px;height:80px;border:1px dashed var(--line);
+    display:flex;align-items:center;justify-content:center;
+    font-family:-apple-system,BlinkMacSystemFont,"Helvetica Neue",Arial,sans-serif;
+    font-size:13px;color:var(--text-dim);text-transform:uppercase;letter-spacing:0.04em;
+  }
+
+  .cta-row{display:flex;gap:20px;flex-wrap:wrap;}
+  .btn-primary{background:var(--text);color:var(--bg);padding:15px 30px;font-size:13px;letter-spacing:0.06em;text-transform:uppercase;font-family:-apple-system,BlinkMacSystemFont,"Helvetica Neue",Arial,sans-serif;}
+  .btn-secondary{border-bottom:1px solid var(--text);padding:15px 4px;font-size:13px;letter-spacing:0.06em;text-transform:uppercase;font-family:-apple-system,BlinkMacSystemFont,"Helvetica Neue",Arial,sans-serif;}
+  .final-cta{text-align:center;}
+  .final-cta .section-head{margin:0 auto 40px;text-align:center;}
+  .final-cta .cta-row{justify-content:center;}
+
+  footer{border-top:1px solid var(--line);padding:56px 0;}
+  footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:16px;font-family:-apple-system,BlinkMacSystemFont,"Helvetica Neue",Arial,sans-serif;font-size:13px;color:var(--text-dim);}
+
+  @media (max-width:900px){
+    .story-grid{grid-template-columns:1fr 1fr;}
+    .team-grid, .expertise-grid{grid-template-columns:1fr 1fr;}
+    .advisor-list{grid-template-columns:1fr 1fr;}
+    .navlinks{display:none;}
+  }
+  @media (max-width:600px){
+    .story-grid, .team-grid, .expertise-grid, .advisor-list{grid-template-columns:1fr;}
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap sans">
+    <a href="design-2-premium-minimal.html" class="logo">Infinite Exploration</a>
+    <div class="navlinks">
+      <a href="design-2-technology.html">Technology</a>
+      <a href="design-2-about.html" class="active">About</a>
+      <a href="design-2-news.html">News</a>
+      <a href="design-2-contact.html">Contact</a>
+    </div>
+    <a href="design-2-contact.html" class="nav-cta">Investor Deck</a>
+  </div>
+</nav>
+
+<section class="page-hero">
+  <div class="wrap page-hero-inner">
+    <div class="eyebrow">About Us</div>
+    <h1>Built by the people who've flown this <em>hardware</em> before</h1>
+    <p class="page-hero-sub sans">Infinite Exploration brings together AI, aerospace, fuel cell, and spacecraft systems expertise to build the energy infrastructure lunar missions have never had.</p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap story-grid">
+    <div class="story-text">
+      <div class="section-tag">Mission &amp; Vision</div>
+      <h2>Why now, why us</h2>
+      <p>[Placeholder &mdash; final mission/vision statement]. The next decade will see more lunar missions launched than in the previous sixty years combined, and nearly every one of them will face the same unsolved problem: surviving the lunar night without a dedicated energy system.</p>
+      <p>[Placeholder &mdash; company origin story]. Our founding team has spent careers building the power and propulsion systems that got previous missions off the ground &mdash; and saw the same gap repeat itself on every program.</p>
+    </div>
+    <div class="story-photo"></div>
+  </div>
+</section>
+
+<section class="shaded">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="section-tag">Leadership Team</div>
+      <h2>Placeholder team &mdash; replace with real bios</h2>
+      <p class="section-desc">Names, titles, and headshots below are placeholders pending final team bios.</p>
+    </div>
+    <div class="team-grid">
+      <div class="team-card">
+        <div class="team-photo"></div>
+        <div class="team-name">[Name]</div>
+        <div class="team-title">Founder &amp; CEO</div>
+        <div class="team-bio">[One or two lines on background &mdash; aerospace, fuel cells, or AI.]</div>
+      </div>
+      <div class="team-card">
+        <div class="team-photo"></div>
+        <div class="team-name">[Name]</div>
+        <div class="team-title">CTO</div>
+        <div class="team-bio">[One or two lines on background &mdash; spacecraft systems or electrolysis.]</div>
+      </div>
+      <div class="team-card">
+        <div class="team-photo"></div>
+        <div class="team-name">[Name]</div>
+        <div class="team-title">Head of Engineering</div>
+        <div class="team-bio">[One or two lines on background &mdash; thermal or power systems.]</div>
+      </div>
+      <div class="team-card">
+        <div class="team-photo"></div>
+        <div class="team-name">[Name]</div>
+        <div class="team-title">Head of AI</div>
+        <div class="team-bio">[One or two lines on background &mdash; autonomy or controls.]</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="section-head">
+      <div class="section-tag">Advisors</div>
+      <h2>Guidance from across the industry</h2>
+      <p class="section-desc">[Placeholder &mdash; confirm advisor names/bios, or remove this section if none yet.]</p>
+    </div>
+    <div class="advisor-list">
+      <div class="advisor-item">
+        <h3>[Advisor Name]</h3>
+        <div class="role">[Affiliation / expertise]</div>
+        <p>[One line on relevance &mdash; e.g. former NASA program lead.]</p>
+      </div>
+      <div class="advisor-item">
+        <h3>[Advisor Name]</h3>
+        <div class="role">[Affiliation / expertise]</div>
+        <p>[One line on relevance &mdash; e.g. fuel cell industry veteran.]</p>
+      </div>
+      <div class="advisor-item">
+        <h3>[Advisor Name]</h3>
+        <div class="role">[Affiliation / expertise]</div>
+        <p>[One line on relevance &mdash; e.g. commercial space investor.]</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="shaded">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="section-tag">Technical Expertise</div>
+      <h2>Research and engineering background</h2>
+    </div>
+    <div class="expertise-grid">
+      <div class="expertise-card">
+        <h4>AI &amp; Autonomy</h4>
+        <p>Real-time control systems for resource-constrained, high-stakes environments.</p>
+      </div>
+      <div class="expertise-card">
+        <h4>Aerospace</h4>
+        <p>Flight hardware design, qualification, and mission operations experience.</p>
+      </div>
+      <div class="expertise-card">
+        <h4>Fuel Cells &amp; Electrolysis</h4>
+        <p>Regenerative energy systems developed for extreme thermal and vacuum conditions.</p>
+      </div>
+      <div class="expertise-card">
+        <h4>Spacecraft Systems</h4>
+        <p>Power, thermal, and structural integration across multiple flown missions.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="section-head">
+      <div class="section-tag">Partners &amp; Collaborators</div>
+      <h2>Working with the broader ecosystem</h2>
+      <p class="section-desc">[Placeholder &mdash; add partner/customer logos as they are confirmed.]</p>
+    </div>
+    <div class="logo-row">
+      <div class="partner-slot">Partner Logo</div>
+      <div class="partner-slot">Partner Logo</div>
+      <div class="partner-slot">Partner Logo</div>
+      <div class="partner-slot">Partner Logo</div>
+    </div>
+  </div>
+</section>
+
+<section class="final-cta">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>Interested in working with us?</h2>
+    </div>
+    <div class="cta-row">
+      <a href="design-2-contact.html" class="btn-primary">Request Investor Deck</a>
+      <a href="design-2-contact.html" class="btn-secondary">Contact Us &rarr;</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div>&copy; 2026 Infinite Exploration</div>
+    <div>About &mdash; Premium Minimalist</div>
+  </div>
+</footer>
+
+</body>
+</html>

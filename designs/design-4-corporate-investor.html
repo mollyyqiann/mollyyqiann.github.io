@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Infinite Exploration — Design 4: Corporate Investor</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#ffffff;
+    --bg-2:#f4f6f9;
+    --navy:#0b2545;
+    --navy-2:#13315c;
+    --line:#dde3ec;
+    --text:#0f1720;
+    --text-dim:#5b6675;
+    --accent:#1c5fb8;
+    --accent-soft:#e8f0fb;
+    --font-body:'Inter',-apple-system,BlinkMacSystemFont,"Helvetica Neue",Arial,sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{
+    background:var(--bg);color:var(--text);
+    font-family:var(--font-body);
+    line-height:1.55;
+  }
+  a{color:inherit;text-decoration:none;}
+  .wrap{max-width:1180px;margin:0 auto;padding:0 40px;}
+
+  nav{border-bottom:1px solid var(--line);}
+  nav .wrap{display:flex;align-items:center;justify-content:space-between;height:84px;}
+  .logo{font-weight:700;font-size:17px;letter-spacing:0.01em;color:var(--navy);}
+  .navlinks{display:flex;gap:36px;font-size:14px;font-weight:600;color:var(--text-dim);}
+  .navlinks a:hover{color:var(--navy);}
+  .nav-cta{background:var(--navy);color:#fff;padding:11px 22px;font-size:13px;font-weight:700;border-radius:2px;}
+
+  .hero{padding:90px 0 0;border-bottom:1px solid var(--line);}
+  .hero-grid{display:grid;grid-template-columns:1.1fr 0.9fr;gap:64px;padding-bottom:70px;align-items:start;}
+  .eyebrow{
+    display:inline-block;font-size:12px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;
+    color:var(--accent);background:var(--accent-soft);padding:6px 14px;border-radius:2px;margin-bottom:24px;
+  }
+  h1{font-size:clamp(32px,4.5vw,48px);font-weight:700;letter-spacing:-0.02em;line-height:1.15;margin-bottom:22px;color:var(--navy);}
+  .hero-sub{font-size:17px;color:var(--text-dim);max-width:520px;margin-bottom:32px;}
+  .cta-row{display:flex;gap:14px;flex-wrap:wrap;}
+  .btn-primary{background:var(--navy);color:#fff;padding:14px 26px;font-weight:700;font-size:14px;border-radius:2px;}
+  .btn-secondary{border:1px solid var(--line);color:var(--navy);padding:14px 26px;font-weight:700;font-size:14px;border-radius:2px;}
+
+  .fact-sheet{border:1px solid var(--line);background:var(--bg-2);padding:28px;}
+  .fact-sheet-title{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;color:var(--text-dim);margin-bottom:20px;border-bottom:1px solid var(--line);padding-bottom:14px;}
+  .fact-row{display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px solid var(--line);font-size:14px;}
+  .fact-row:last-child{border-bottom:none;}
+  .fact-label{color:var(--text-dim);}
+  .fact-val{font-weight:700;color:var(--navy);}
+
+  .ticker{background:var(--navy);color:#fff;padding:16px 0;}
+  .ticker .wrap{display:flex;gap:56px;flex-wrap:wrap;font-size:13px;font-weight:600;letter-spacing:0.02em;}
+  .ticker b{color:#7db8ff;}
+
+  .hero-photo{
+    height:74vh;min-height:520px;position:relative;overflow:hidden;
+    background:var(--navy);
+  }
+  .hero-photo-img{
+    position:absolute;inset:-15% 0;z-index:0;
+    will-change:transform;
+  }
+  .hero-photo-kb{
+    position:absolute;inset:-10%;
+    background:url("images/d4-hero-astronaut-ladder.jpg") center 30% / cover no-repeat;
+    animation:kenburns 26s ease-in-out infinite alternate;
+    will-change:transform;
+  }
+  .hero-photo::before{
+    content:"";position:absolute;inset:0;z-index:1;
+    background:linear-gradient(100deg, rgba(11,37,69,0.85) 0%, rgba(11,37,69,0.25) 45%, transparent 70%);
+  }
+  .hero-photo-caption{
+    position:absolute;left:40px;bottom:32px;max-width:420px;color:#fff;z-index:2;
+  }
+  .hero-photo-caption .k{font-size:12px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;color:#7db8ff;margin-bottom:10px;}
+  .hero-photo-caption p{font-size:15px;color:#dbe4f0;}
+
+  .pillars-visual{aspect-ratio:4/5;margin-bottom:16px;position:relative;overflow:hidden;background:var(--bg-2);}
+  .pillars-visual-img{
+    position:absolute;inset:-15% 0;
+    will-change:transform;
+  }
+  .pillars-visual-kb{
+    position:absolute;inset:-10%;
+    background:url("images/d4-intro-ascent-earth.jpg") center / cover no-repeat;
+    animation:kenburns 24s ease-in-out infinite alternate;
+    will-change:transform;
+  }
+
+  section{padding:90px 0;}
+  .section-head{max-width:640px;margin-bottom:48px;}
+  .section-tag{font-size:12px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--accent);margin-bottom:14px;}
+  h2{font-size:clamp(26px,3.2vw,32px);font-weight:700;letter-spacing:-0.01em;color:var(--navy);margin-bottom:14px;}
+  .section-desc{color:var(--text-dim);font-size:15px;}
+
+  .intro-grid{display:grid;grid-template-columns:1fr 1fr;gap:56px;}
+  .intro-text p{color:var(--text-dim);font-size:15px;margin-bottom:14px;}
+  .pillars{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+  .pillar{border:1px solid var(--line);padding:20px;}
+  .pillar-label{font-size:11px;font-weight:700;color:var(--accent);text-transform:uppercase;letter-spacing:0.05em;margin-bottom:8px;}
+  .pillar h4{font-size:15px;font-weight:700;color:var(--navy);margin-bottom:6px;}
+  .pillar p{font-size:13px;color:var(--text-dim);}
+
+  .shaded{background:var(--bg-2);}
+
+  .outputs-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border:1px solid var(--line);}
+  .output-card{background:var(--bg);padding:30px 24px;border-right:1px solid var(--line);}
+  .output-card:last-child{border-right:none;}
+  .output-tag{font-size:11px;font-weight:700;color:var(--accent);text-transform:uppercase;letter-spacing:0.05em;margin-bottom:16px;}
+  .output-card h3{font-size:17px;font-weight:700;color:var(--navy);margin-bottom:10px;}
+  .output-card p{font-size:13px;color:var(--text-dim);}
+
+  .why-list{display:flex;flex-direction:column;border-top:1px solid var(--line);}
+  .why-item{display:grid;grid-template-columns:36px 1fr;gap:20px;padding:22px 0;border-bottom:1px solid var(--line);}
+  .why-num{font-weight:700;color:var(--accent);font-size:15px;}
+  .why-item h3{font-size:15px;font-weight:700;color:var(--navy);margin-bottom:6px;}
+  .why-item p{font-size:14px;color:var(--text-dim);}
+
+  .roadmap-table{width:100%;border-collapse:collapse;}
+  .roadmap-table th{
+    text-align:left;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.05em;
+    color:var(--text-dim);border-bottom:2px solid var(--navy);padding:10px 16px 10px 0;
+  }
+  .roadmap-table td{padding:18px 16px 18px 0;border-bottom:1px solid var(--line);font-size:14px;vertical-align:top;}
+  .roadmap-table td.phase{font-weight:700;color:var(--navy);white-space:nowrap;}
+  .roadmap-table td.desc{color:var(--text-dim);}
+
+  .news-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border:1px solid var(--line);}
+  .news-card{padding:26px;border-right:1px solid var(--line);}
+  .news-card:last-child{border-right:none;}
+  .news-date{font-size:12px;color:var(--text-dim);margin-bottom:10px;font-weight:600;}
+  .news-card h4{font-size:15px;font-weight:700;color:var(--navy);margin-bottom:8px;}
+  .news-card p{font-size:13px;color:var(--text-dim);}
+
+  .final-cta{background:var(--navy);color:#fff;text-align:center;}
+  .final-cta h2{color:#fff;}
+  .final-cta .section-desc{color:#b7c6dd;}
+  .final-cta .section-head{margin:0 auto 32px;text-align:center;}
+  .final-cta .cta-row{justify-content:center;}
+  .final-cta .btn-secondary{border-color:#3a5a86;color:#fff;}
+
+  footer{border-top:1px solid var(--line);padding:44px 0;}
+  footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:16px;font-size:13px;color:var(--text-dim);}
+
+  @media (max-width:900px){
+    .hero-grid, .intro-grid, .pillars{grid-template-columns:1fr;}
+    .outputs-grid, .news-grid{grid-template-columns:1fr 1fr;}
+    .navlinks{display:none;}
+  }
+  @media (max-width:600px){
+    .outputs-grid, .news-grid{grid-template-columns:1fr;}
+  }
+
+  /* scroll reveal */
+  .reveal{opacity:0;transform:translateY(24px);transition:opacity .8s cubic-bezier(.16,.8,.3,1),transform .8s cubic-bezier(.16,.8,.3,1);}
+  .reveal.is-visible{opacity:1;transform:translateY(0);}
+  .reveal-stagger > *{opacity:0;transform:translateY(24px);transition:opacity .7s cubic-bezier(.16,.8,.3,1),transform .7s cubic-bezier(.16,.8,.3,1);}
+  .reveal-stagger.is-visible > *{opacity:1;transform:translateY(0);}
+  .reveal-stagger.is-visible > *:nth-child(2){transition-delay:.08s;}
+  .reveal-stagger.is-visible > *:nth-child(3){transition-delay:.16s;}
+  .reveal-stagger.is-visible > *:nth-child(4){transition-delay:.24s;}
+  @keyframes kenburns{0%{transform:scale(1.05);}100%{transform:scale(1.18);}}
+  @media (prefers-reduced-motion:reduce){
+    .reveal, .reveal-stagger > *, .hero-photo-img, .pillars-visual-img, .hero-photo-kb, .pillars-visual-kb{opacity:1!important;transform:none!important;animation:none!important;transition:none!important;}
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <div class="logo">INFINITE EXPLORATION</div>
+    <div class="navlinks">
+      <a href="#">Technology</a>
+      <a href="#">About</a>
+      <a href="#">News</a>
+      <a href="#">Contact</a>
+    </div>
+    <a href="#" class="nav-cta">Investor Relations</a>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="wrap hero-grid reveal-stagger">
+    <div>
+      <div class="eyebrow">AI-Powered Lunar Energy Infrastructure</div>
+      <h1>The first energy utility for the Moon</h1>
+      <p class="hero-sub">Infinite Exploration designs and operates the regenerative power systems that will sustain lunar habitats, rovers, and industry through every lunar day and night.</p>
+      <div class="cta-row">
+        <a href="#" class="btn-primary">Request Investor Deck</a>
+        <a href="#" class="btn-secondary">Company Overview</a>
+      </div>
+    </div>
+    <div class="fact-sheet">
+      <div class="fact-sheet-title">Company Snapshot</div>
+      <div class="fact-row"><span class="fact-label">Sector</span><span class="fact-val">Lunar Energy Infrastructure</span></div>
+      <div class="fact-row"><span class="fact-label">Platform Scale</span><span class="fact-val">1 kW &ndash; MW class</span></div>
+      <div class="fact-row"><span class="fact-label">Core Outputs</span><span class="fact-val">Power, H&#8322;, O&#8322;, H&#8322;O</span></div>
+      <div class="fact-row"><span class="fact-label">Stage</span><span class="fact-val">Ground Validation</span></div>
+      <div class="fact-row"><span class="fact-label">Target Demo</span><span class="fact-val">2027</span></div>
+    </div>
+  </div>
+</section>
+
+<div class="ticker">
+  <div class="wrap">
+    <div>MODULAR SCALE &nbsp;<b>1kW &rarr; MW</b></div>
+    <div>LONGEST NIGHT SURVIVED &nbsp;<b>354 HRS</b></div>
+    <div>CORE OUTPUTS &nbsp;<b>4</b></div>
+    <div>SURFACE DEMO TARGET &nbsp;<b>2027</b></div>
+  </div>
+</div>
+
+<div class="hero-photo reveal">
+  <div class="hero-photo-img" data-parallax="0.16"><div class="hero-photo-kb"></div></div>
+  <div class="hero-photo-caption">
+    <div class="k">Flight Heritage</div>
+    <p>Six decades of crewed and robotic lunar surface operations inform our engineering baseline &mdash; we are building the power layer the next generation of missions will run on.</p>
+  </div>
+</div>
+
+<section>
+  <div class="wrap intro-grid">
+    <div class="intro-text reveal">
+      <div class="section-tag">Who We Are</div>
+      <h2>Infrastructure, not a single mission</h2>
+      <p>Infinite Exploration designs the energy backbone that lunar habitats, rovers, and industry will depend on. Our platform lets AI coordinate solar generation, electrolysis, fuel cells, and thermal management as one continuous system.</p>
+      <p>We are building the utility layer underneath the next decade of lunar activity, so every mission that follows does not have to solve power on its own.</p>
+    </div>
+    <div class="reveal">
+    <div class="pillars-visual"><div class="pillars-visual-img" data-parallax="0.12"><div class="pillars-visual-kb"></div></div></div>
+    <div class="pillars reveal-stagger">
+      <div class="pillar"><div class="pillar-label">Pillar 01</div><h4>Power</h4><p>Continuous supply, day and night.</p></div>
+      <div class="pillar"><div class="pillar-label">Pillar 02</div><h4>Hydrogen</h4><p>On-demand via electrolysis.</p></div>
+      <div class="pillar"><div class="pillar-label">Pillar 03</div><h4>Oxygen</h4><p>Co-product at no added mass.</p></div>
+      <div class="pillar"><div class="pillar-label">Pillar 04</div><h4>Water</h4><p>Closed-loop recovery.</p></div>
+    </div>
+    </div>
+  </div>
+</section>
+
+<section class="shaded">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="section-tag">The Platform</div>
+      <h2>Four outputs, one regenerative cycle</h2>
+      <p class="section-desc">Solar power drives electrolysis; the resulting hydrogen, oxygen, and water feed a fuel cell that returns power through the lunar night.</p>
+    </div>
+    <div class="outputs-grid reveal-stagger">
+      <div class="output-card"><div class="output-tag">Output 01</div><h3>Power</h3><p>Continuous electrical power from 1 kW rover platforms to MW-class habitats.</p></div>
+      <div class="output-card"><div class="output-tag">Output 02</div><h3>Hydrogen</h3><p>Produced on demand via electrolysis for fuel cells and propulsion.</p></div>
+      <div class="output-card"><div class="output-tag">Output 03</div><h3>Oxygen</h3><p>Breathable oxygen and oxidizer as a co-product of electrolysis.</p></div>
+      <div class="output-card"><div class="output-tag">Output 04</div><h3>Water</h3><p>Closed-loop recovery for life support and propellant.</p></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="section-tag">The Case</div>
+      <h2>Why lunar energy infrastructure, why now</h2>
+    </div>
+    <div class="why-list reveal-stagger">
+      <div class="why-item"><div class="why-num">01</div><div><h3>No lunar night survives on batteries alone</h3><p>Two weeks of darkness demands a regenerative cycle, not just storage.</p></div></div>
+      <div class="why-item"><div class="why-num">02</div><div><h3>Every mission currently reinvents power</h3><p>A shared utility layer cuts cost and risk across the industry.</p></div></div>
+      <div class="why-item"><div class="why-num">03</div><div><h3>ISRU needs more than electricity</h3><p>Our cycle produces hydrogen, oxygen, and water as one system.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="shaded">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="section-tag">Roadmap</div>
+      <h2>From prototype to lunar utility</h2>
+    </div>
+    <table class="roadmap-table reveal">
+      <tr><th>Phase</th><th>Milestone</th><th>Detail</th></tr>
+      <tr><td class="phase">Now</td><td>Ground Validation</td><td class="desc">Full regenerative cycle demonstrated in a lunar-representative thermal-vacuum environment.</td></tr>
+      <tr><td class="phase">Next</td><td>Flight Qualification</td><td class="desc">Hardware-in-the-loop testing toward a CLPS-class lunar delivery.</td></tr>
+      <tr><td class="phase">2027</td><td>Surface Demonstration</td><td class="desc">First lunar surface deployment, powering a partner payload through a full lunar night.</td></tr>
+      <tr><td class="phase">2029+</td><td>Commercial Service</td><td class="desc">Power-as-a-service offering for landers, habitats, and ISRU operators.</td></tr>
+    </table>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="section-tag">News</div>
+      <h2>Featured updates</h2>
+    </div>
+    <div class="news-grid reveal-stagger">
+      <div class="news-card"><div class="news-date">Placeholder &mdash; Jun 2026</div><h4>Prototype completes thermal-vacuum test campaign</h4><p>Replace with real milestone copy once confirmed.</p></div>
+      <div class="news-card"><div class="news-date">Placeholder &mdash; Apr 2026</div><h4>Named to [conference] speaker lineup</h4><p>Replace with real milestone copy once confirmed.</p></div>
+      <div class="news-card"><div class="news-date">Placeholder &mdash; Feb 2026</div><h4>Team publishes lunar-night power research</h4><p>Replace with real milestone copy once confirmed.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="final-cta">
+  <div class="wrap reveal">
+    <div class="section-head">
+      <div class="section-tag" style="color:#7db8ff;">Investor Relations</div>
+      <h2>Building the power layer for the next era of lunar exploration</h2>
+    </div>
+    <div class="cta-row">
+      <a href="#" class="btn-primary" style="background:#fff;color:var(--navy);">Request Investor Deck</a>
+      <a href="#" class="btn-secondary">Contact Us</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div>&copy; 2026 Infinite Exploration</div>
+    <div>Design direction 4 of 5 &mdash; Corporate Investor (Intuitive Machines influence)</div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var revealEls = document.querySelectorAll('.reveal, .reveal-stagger');
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(entry){
+      if(entry.isIntersecting){
+        entry.target.classList.add('is-visible');
+        io.unobserve(entry.target);
+      }
+    });
+  }, {threshold:0.15, rootMargin:'0px 0px -80px 0px'});
+  revealEls.forEach(function(el){ io.observe(el); });
+
+  var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if(!reduceMotion){
+    var parallaxEls = document.querySelectorAll('[data-parallax]');
+    var ticking = false;
+    function updateParallax(){
+      parallaxEls.forEach(function(el){
+        var speed = parseFloat(el.getAttribute('data-parallax')) || 0;
+        var rect = el.parentElement.getBoundingClientRect();
+        var offset = (rect.top - window.innerHeight / 2) * speed;
+        el.style.transform = 'translateY(' + offset + 'px)';
+      });
+      ticking = false;
+    }
+    window.addEventListener('scroll', function(){
+      if(!ticking){
+        window.requestAnimationFrame(updateParallax);
+        ticking = true;
+      }
+    }, {passive:true});
+    updateParallax();
+  }
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>News — Infinite Exploration</title>
+<style>
+  :root{
+    --bg:#faf8f4;
+    --bg-2:#f2ede4;
+    --card:#ffffff;
+    --line:#e4ddd0;
+    --text:#20201d;
+    --text-dim:#6b6459;
+    --accent:#9c6b3e;
+    --accent-soft:#e8dcc8;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{background:var(--bg);color:var(--text);font-family:Georgia,"Iowan Old Style","Palatino Linotype",serif;line-height:1.6;}
+  .sans{font-family:-apple-system,BlinkMacSystemFont,"Helvetica Neue",Arial,sans-serif;}
+  a{color:inherit;text-decoration:none;}
+  .wrap{max-width:1180px;margin:0 auto;padding:0 40px;}
+
+  nav{border-bottom:1px solid var(--line);}
+  nav .wrap{display:flex;align-items:center;justify-content:space-between;height:96px;}
+  .logo{font-size:20px;letter-spacing:0.01em;}
+  .navlinks{display:flex;gap:44px;font-size:14px;color:var(--text-dim);}
+  .navlinks a:hover, .navlinks a.active{color:var(--text);}
+  .nav-cta{border:1px solid var(--text);color:var(--text);padding:10px 22px;border-radius:2px;font-size:13px;letter-spacing:0.04em;text-transform:uppercase;}
+  .nav-cta:hover{background:var(--text);color:var(--bg);}
+
+  .page-hero{padding:120px 0 60px;}
+  .page-hero-inner{max-width:760px;}
+  .eyebrow{font-size:13px;letter-spacing:0.14em;text-transform:uppercase;color:var(--accent);margin-bottom:28px;font-family:-apple-system,BlinkMacSystemFont,"Helvetica Neue",Arial,sans-serif;}
+  h1{font-size:clamp(34px,5vw,52px);font-weight:400;line-height:1.15;margin-bottom:24px;letter-spacing:-0.01em;}
+  h1 em{font-style:italic;color:var(--accent);}
+  .page-hero-sub{font-size:19px;color:var(--text-dim);max-width:600px;}
+
+  section{padding:90px 0;}
+  .section-head{max-width:640px;margin-bottom:56px;}
+  .section-tag{font-size:13px;letter-spacing:0.14em;text-transform:uppercase;color:var(--accent);margin-bottom:18px;font-family:-apple-system,BlinkMacSystemFont,"Helvetica Neue",Arial,sans-serif;}
+  h2{font-size:clamp(26px,3.5vw,34px);font-weight:400;letter-spacing:-0.01em;margin-bottom:20px;}
+  .section-desc{color:var(--text-dim);font-size:17px;font-family:-apple-system,BlinkMacSystemFont,"Helvetica Neue",Arial,sans-serif;}
+
+  .shaded{background:var(--bg-2);}
+
+  .filter-row{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:48px;font-family:-apple-system,BlinkMacSystemFont,"Helvetica Neue",Arial,sans-serif;}
+  .filter-pill{
+    border:1px solid var(--line);padding:8px 18px;border-radius:100px;font-size:13px;color:var(--text-dim);
+  }
+  .filter-pill.active{background:var(--text);color:var(--bg);border-color:var(--text);}
+
+  .news-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:48px;}
+  .news-card{}
+  .news-thumb{aspect-ratio:16/10;background:linear-gradient(135deg,#dcd3c3,#cdd7d6);margin-bottom:20px;}
+  .news-cat{font-family:-apple-system,BlinkMacSystemFont,"Helvetica Neue",Arial,sans-serif;font-size:11px;color:var(--accent);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:8px;}
+  .news-date{font-family:-apple-system,BlinkMacSystemFont,"Helvetica Neue",Arial,sans-serif;font-size:12px;color:var(--text-dim);margin-bottom:10px;}
+  .news-card h4{font-size:19px;font-weight:400;margin-bottom:10px;}
+  .news-card p{font-size:14px;color:var(--text-dim);font-family:-apple-system,BlinkMacSystemFont,"Helvetica Neue",Arial,sans-serif;}
+
+  .pub-list{display:flex;flex-direction:column;}
+  .pub-item{display:grid;grid-template-columns:140px 1fr;gap:24px;padding:24px 0;border-bottom:1px solid var(--line);align-items:baseline;}
+  .pub-item:first-child{border-top:1px solid var(--line);}
+  .pub-date{font-family:-apple-system,BlinkMacSystemFont,"Helvetica Neue",Arial,sans-serif;font-size:13px;color:var(--text-dim);}
+  .pub-item h4{font-size:17px;font-weight:400;margin-bottom:6px;}
+  .pub-item p{font-size:14px;color:var(--text-dim);font-family:-apple-system,BlinkMacSystemFont,"Helvetica Neue",Arial,sans-serif;}
+
+  .event-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:32px;}
+  .event-card{border:1px solid var(--line);padding:28px;}
+  .event-date{font-family:-apple-system,BlinkMacSystemFont,"Helvetica Neue",Arial,sans-serif;font-size:13px;color:var(--accent);text-transform:uppercase;letter-spacing:0.04em;margin-bottom:12px;}
+  .event-card h4{font-size:18px;font-weight:400;margin-bottom:8px;}
+  .event-card p{font-size:14px;color:var(--text-dim);font-family:-apple-system,BlinkMacSystemFont,"Helvetica Neue",Arial,sans-serif;}
+
+  .cta-row{display:flex;gap:20px;flex-wrap:wrap;}
+  .btn-primary{background:var(--text);color:var(--bg);padding:15px 30px;font-size:13px;letter-spacing:0.06em;text-transform:uppercase;font-family:-apple-system,BlinkMacSystemFont,"Helvetica Neue",Arial,sans-serif;}
+  .btn-secondary{border-bottom:1px solid var(--text);padding:15px 4px;font-size:13px;letter-spacing:0.06em;text-transform:uppercase;font-family:-apple-system,BlinkMacSystemFont,"Helvetica Neue",Arial,sans-serif;}
+  .final-cta{text-align:center;}
+  .final-cta .section-head{margin:0 auto 40px;text-align:center;}
+  .final-cta .cta-row{justify-content:center;}
+
+  footer{border-top:1px solid var(--line);padding:56px 0;}
+  footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:16px;font-family:-apple-system,BlinkMacSystemFont,"Helvetica Neue",Arial,sans-serif;font-size:13px;color:var(--text-dim);}
+
+  @media (max-width:900px){
+    .news-grid, .event-grid{grid-template-columns:1fr 1fr;}
+    .pub-item{grid-template-columns:1fr;}
+    .navlinks{display:none;}
+  }
+  @media (max-width:600px){
+    .news-grid, .event-grid{grid-template-columns:1fr;}
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap sans">
+    <a href="design-2-premium-minimal.html" class="logo">Infinite Exploration</a>
+    <div class="navlinks">
+      <a href="design-2-technology.html">Technology</a>
+      <a href="design-2-about.html">About</a>
+      <a href="design-2-news.html" class="active">News</a>
+      <a href="design-2-contact.html">Contact</a>
+    </div>
+    <a href="design-2-contact.html" class="nav-cta">Investor Deck</a>
+  </div>
+</nav>
+
+<section class="page-hero">
+  <div class="wrap page-hero-inner">
+    <div class="eyebrow">News</div>
+    <h1>Updates from the <em>build</em></h1>
+    <p class="page-hero-sub sans">Milestones, prototype progress, research, and where to find us next. Items below are placeholders &mdash; swap in real announcements as they're confirmed.</p>
+  </div>
+</section>
+
+<section style="padding-top:0;">
+  <div class="wrap">
+    <div class="filter-row">
+      <span class="filter-pill active">All</span>
+      <span class="filter-pill">Announcements</span>
+      <span class="filter-pill">Technology</span>
+      <span class="filter-pill">Research</span>
+      <span class="filter-pill">Events</span>
+      <span class="filter-pill">Funding</span>
+    </div>
+    <div class="news-grid">
+      <div class="news-card">
+        <div class="news-thumb"></div>
+        <div class="news-cat">Technology</div>
+        <div class="news-date">Placeholder &mdash; June 2026</div>
+        <h4>Regenerative cycle prototype completes thermal-vacuum test campaign</h4>
+        <p>Replace with real milestone copy once confirmed.</p>
+      </div>
+      <div class="news-card">
+        <div class="news-thumb"></div>
+        <div class="news-cat">Events</div>
+        <div class="news-date">Placeholder &mdash; April 2026</div>
+        <h4>Infinite Exploration named to [conference] speaker lineup</h4>
+        <p>Replace with real milestone copy once confirmed.</p>
+      </div>
+      <div class="news-card">
+        <div class="news-thumb"></div>
+        <div class="news-cat">Research</div>
+        <div class="news-date">Placeholder &mdash; February 2026</div>
+        <h4>Founding team publishes research on lunar-night power architectures</h4>
+        <p>Replace with real milestone copy once confirmed.</p>
+      </div>
+      <div class="news-card">
+        <div class="news-thumb"></div>
+        <div class="news-cat">Announcements</div>
+        <div class="news-date">Placeholder &mdash; January 2026</div>
+        <h4>Infinite Exploration comes out of stealth</h4>
+        <p>Replace with real milestone copy once confirmed.</p>
+      </div>
+      <div class="news-card">
+        <div class="news-thumb"></div>
+        <div class="news-cat">Funding</div>
+        <div class="news-date">Placeholder &mdash; TBD</div>
+        <h4>[Funding round] announcement</h4>
+        <p>Replace with real milestone copy once confirmed, or remove if not yet public.</p>
+      </div>
+      <div class="news-card">
+        <div class="news-thumb"></div>
+        <div class="news-cat">Announcements</div>
+        <div class="news-date">Placeholder &mdash; TBD</div>
+        <h4>[Partnership announcement]</h4>
+        <p>Replace with real milestone copy once confirmed, or remove if not yet public.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="shaded">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="section-tag">Research Publications</div>
+      <h2>Papers and technical reports</h2>
+      <p class="section-desc">[Placeholder &mdash; add links to published research, or remove this section for v1.]</p>
+    </div>
+    <div class="pub-list">
+      <div class="pub-item">
+        <div class="pub-date">[Month Year]</div>
+        <div>
+          <h4>[Publication title]</h4>
+          <p>[Authors, venue/journal, one-line abstract summary.]</p>
+        </div>
+      </div>
+      <div class="pub-item">
+        <div class="pub-date">[Month Year]</div>
+        <div>
+          <h4>[Publication title]</h4>
+          <p>[Authors, venue/journal, one-line abstract summary.]</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="section-head">
+      <div class="section-tag">Upcoming Events</div>
+      <h2>Where to find us</h2>
+    </div>
+    <div class="event-grid">
+      <div class="event-card">
+        <div class="event-date">[Month Year]</div>
+        <h4>[Conference name]</h4>
+        <p>[City] &mdash; [role, e.g. exhibiting, speaking, panel].</p>
+      </div>
+      <div class="event-card">
+        <div class="event-date">[Month Year]</div>
+        <h4>[Conference name]</h4>
+        <p>[City] &mdash; [role, e.g. exhibiting, speaking, panel].</p>
+      </div>
+      <div class="event-card">
+        <div class="event-date">[Month Year]</div>
+        <h4>[Conference name]</h4>
+        <p>[City] &mdash; [role, e.g. exhibiting, speaking, panel].</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="final-cta">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>Want updates in your inbox?</h2>
+    </div>
+    <div class="cta-row">
+      <a href="design-2-contact.html" class="btn-primary">Request Investor Deck</a>
+      <a href="design-2-contact.html" class="btn-secondary">Contact Us &rarr;</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div>&copy; 2026 Infinite Exploration</div>
+    <div>News &mdash; Premium Minimalist</div>
+  </div>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact — Infinite Exploration</title>
+<style>
+  :root{
+    --bg:#faf8f4;
+    --bg-2:#f2ede4;
+    --card:#ffffff;
+    --line:#e4ddd0;
+    --text:#20201d;
+    --text-dim:#6b6459;
+    --accent:#9c6b3e;
+    --accent-soft:#e8dcc8;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{background:var(--bg);color:var(--text);font-family:Georgia,"Iowan Old Style","Palatino Linotype",serif;line-height:1.6;}
+  .sans{font-family:-apple-system,BlinkMacSystemFont,"Helvetica Neue",Arial,sans-serif;}
+  a{color:inherit;text-decoration:none;}
+  .wrap{max-width:1180px;margin:0 auto;padding:0 40px;}
+
+  nav{border-bottom:1px solid var(--line);}
+  nav .wrap{display:flex;align-items:center;justify-content:space-between;height:96px;}
+  .logo{font-size:20px;letter-spacing:0.01em;}
+  .navlinks{display:flex;gap:44px;font-size:14px;color:var(--text-dim);}
+  .navlinks a:hover, .navlinks a.active{color:var(--text);}
+  .nav-cta{border:1px solid var(--text);color:var(--text);padding:10px 22px;border-radius:2px;font-size:13px;letter-spacing:0.04em;text-transform:uppercase;}
+  .nav-cta:hover{background:var(--text);color:var(--bg);}
+
+  .page-hero{padding:120px 0 60px;}
+  .page-hero-inner{max-width:760px;}
+  .eyebrow{font-size:13px;letter-spacing:0.14em;text-transform:uppercase;color:var(--accent);margin-bottom:28px;font-family:-apple-system,BlinkMacSystemFont,"Helvetica Neue",Arial,sans-serif;}
+  h1{font-size:clamp(34px,5vw,52px);font-weight:400;line-height:1.15;margin-bottom:24px;letter-spacing:-0.01em;}
+  h1 em{font-style:italic;color:var(--accent);}
+  .page-hero-sub{font-size:19px;color:var(--text-dim);max-width:600px;}
+
+  section{padding:0 0 100px;}
+  .section-tag{font-size:13px;letter-spacing:0.14em;text-transform:uppercase;color:var(--accent);margin-bottom:18px;font-family:-apple-system,BlinkMacSystemFont,"Helvetica Neue",Arial,sans-serif;}
+  h2{font-size:clamp(24px,3vw,30px);font-weight:400;letter-spacing:-0.01em;margin-bottom:16px;}
+  .section-desc{color:var(--text-dim);font-size:16px;font-family:-apple-system,BlinkMacSystemFont,"Helvetica Neue",Arial,sans-serif;margin-bottom:32px;}
+
+  .contact-grid{display:grid;grid-template-columns:1.2fr 0.8fr;gap:80px;}
+
+  form{display:flex;flex-direction:column;gap:22px;font-family:-apple-system,BlinkMacSystemFont,"Helvetica Neue",Arial,sans-serif;}
+  .field label{display:block;font-size:13px;color:var(--text-dim);text-transform:uppercase;letter-spacing:0.04em;margin-bottom:8px;}
+  .field input, .field select, .field textarea{
+    width:100%;border:1px solid var(--line);background:var(--card);padding:14px 16px;
+    font-size:15px;color:var(--text);font-family:inherit;
+  }
+  .field textarea{resize:vertical;min-height:120px;}
+  .field-row{display:grid;grid-template-columns:1fr 1fr;gap:22px;}
+  .submit-btn{
+    align-self:flex-start;background:var(--text);color:var(--bg);padding:15px 34px;
+    font-size:13px;letter-spacing:0.06em;text-transform:uppercase;border:none;cursor:pointer;
+  }
+  .form-note{font-size:13px;color:var(--text-dim);}
+
+  .info-block{border-top:1px solid var(--line);padding-top:28px;margin-bottom:40px;font-family:-apple-system,BlinkMacSystemFont,"Helvetica Neue",Arial,sans-serif;}
+  .info-block h3{font-size:13px;color:var(--accent);text-transform:uppercase;letter-spacing:0.06em;margin-bottom:12px;font-family:-apple-system,BlinkMacSystemFont,"Helvetica Neue",Arial,sans-serif;}
+  .info-block p, .info-block a{font-size:16px;color:var(--text);}
+  .info-block a:hover{color:var(--accent);}
+
+  .deck-box{
+    background:var(--bg-2);border:1px solid var(--line);padding:32px;margin-bottom:40px;
+  }
+  .deck-box h3{font-size:20px;font-weight:400;margin-bottom:12px;}
+  .deck-box p{font-size:15px;color:var(--text-dim);font-family:-apple-system,BlinkMacSystemFont,"Helvetica Neue",Arial,sans-serif;margin-bottom:20px;}
+  .btn-primary{
+    display:inline-block;background:var(--text);color:var(--bg);padding:14px 26px;
+    font-size:13px;letter-spacing:0.06em;text-transform:uppercase;font-family:-apple-system,BlinkMacSystemFont,"Helvetica Neue",Arial,sans-serif;
+  }
+
+  .inquiry-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:32px;border-top:1px solid var(--line);padding-top:48px;}
+  .inquiry-item h4{font-size:17px;font-weight:400;margin-bottom:10px;}
+  .inquiry-item p{font-size:14px;color:var(--text-dim);font-family:-apple-system,BlinkMacSystemFont,"Helvetica Neue",Arial,sans-serif;margin-bottom:10px;}
+  .inquiry-item a{font-size:14px;color:var(--accent);font-family:-apple-system,BlinkMacSystemFont,"Helvetica Neue",Arial,sans-serif;}
+
+  footer{border-top:1px solid var(--line);padding:56px 0;}
+  footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:16px;font-family:-apple-system,BlinkMacSystemFont,"Helvetica Neue",Arial,sans-serif;font-size:13px;color:var(--text-dim);}
+
+  @media (max-width:900px){
+    .contact-grid{grid-template-columns:1fr;}
+    .inquiry-grid{grid-template-columns:1fr 1fr;}
+    .navlinks{display:none;}
+  }
+  @media (max-width:600px){
+    .field-row, .inquiry-grid{grid-template-columns:1fr;}
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap sans">
+    <a href="design-2-premium-minimal.html" class="logo">Infinite Exploration</a>
+    <div class="navlinks">
+      <a href="design-2-technology.html">Technology</a>
+      <a href="design-2-about.html">About</a>
+      <a href="design-2-news.html">News</a>
+      <a href="design-2-contact.html" class="active">Contact</a>
+    </div>
+    <a href="design-2-contact.html" class="nav-cta">Investor Deck</a>
+  </div>
+</nav>
+
+<section class="page-hero" style="padding-bottom:60px;">
+  <div class="wrap page-hero-inner">
+    <div class="eyebrow">Contact</div>
+    <h1>Let's talk about the <em>Moon</em></h1>
+    <p class="page-hero-sub sans">For investors, government agencies, commercial partners, and research collaborators. [Placeholder &mdash; confirm whether this form should send email, or stays a static demo form.]</p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap contact-grid">
+    <div>
+      <div class="section-tag">Send a Message</div>
+      <h2>Get in touch</h2>
+      <p class="section-desc">This is a static placeholder form for the prototype. Wire it to a form backend or mailto once the build moves past demo stage.</p>
+      <form onsubmit="return false;">
+        <div class="field-row">
+          <div class="field">
+            <label for="name">Name</label>
+            <input id="name" type="text" placeholder="Jane Doe">
+          </div>
+          <div class="field">
+            <label for="email">Email</label>
+            <input id="email" type="email" placeholder="jane@company.com">
+          </div>
+        </div>
+        <div class="field">
+          <label for="org">Organization</label>
+          <input id="org" type="text" placeholder="Company / agency name">
+        </div>
+        <div class="field">
+          <label for="reason">I'm reaching out as a&hellip;</label>
+          <select id="reason">
+            <option>Investor</option>
+            <option>Government agency</option>
+            <option>Commercial partner</option>
+            <option>Research collaborator</option>
+            <option>Media</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="message">Message</label>
+          <textarea id="message" placeholder="Tell us a bit about what you're looking for."></textarea>
+        </div>
+        <button class="submit-btn" type="submit">Send Message</button>
+        <p class="form-note">Placeholder submit &mdash; not yet wired to a backend.</p>
+      </form>
+    </div>
+
+    <div>
+      <div class="deck-box">
+        <h3>Request the Investor Deck</h3>
+        <p>[Placeholder &mdash; confirm delivery method: email capture, gated PDF download, or a form like this one.]</p>
+        <a href="#" class="btn-primary">Request Deck</a>
+      </div>
+
+      <div class="info-block">
+        <h3>Email</h3>
+        <a href="mailto:hello@infiniteexploration.example">hello@infiniteexploration.example</a>
+        <p style="margin-top:6px;font-size:13px;color:var(--text-dim);">[Placeholder &mdash; confirm real domain/address]</p>
+      </div>
+
+      <div class="info-block">
+        <h3>LinkedIn</h3>
+        <a href="#">linkedin.com/company/infinite-exploration</a>
+        <p style="margin-top:6px;font-size:13px;color:var(--text-dim);">[Placeholder &mdash; confirm real URL]</p>
+      </div>
+
+      <div class="info-block">
+        <h3>Office</h3>
+        <p>[Placeholder &mdash; city / address, if applicable]</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="wrap">
+    <div class="inquiry-grid">
+      <div class="inquiry-item">
+        <h4>Investors</h4>
+        <p>Deck requests, funding conversations, and diligence questions.</p>
+        <a href="mailto:investors@infiniteexploration.example">investors@infiniteexploration.example</a>
+      </div>
+      <div class="inquiry-item">
+        <h4>Partners</h4>
+        <p>Mission integration, ISRU, and technology partnership inquiries.</p>
+        <a href="mailto:partners@infiniteexploration.example">partners@infiniteexploration.example</a>
+      </div>
+      <div class="inquiry-item">
+        <h4>Media</h4>
+        <p>Press inquiries, interview requests, and brand assets.</p>
+        <a href="mailto:press@infiniteexploration.example">press@infiniteexploration.example</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div>&copy; 2026 Infinite Exploration</div>
+    <div>Contact &mdash; Premium Minimalist</div>
+  </div>
+</footer>
+
+</body>
+</html>
