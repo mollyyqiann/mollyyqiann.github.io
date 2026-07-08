@@ -4,7 +4,7 @@
     {
       "name": "designs-static",
       "runtimeExecutable": "python3",
-      "runtimeArgs": ["-m", "http.server", "4173", "--directory", "/Users/mollyqian/Desktop/infinite exploration/designs"],
+      "runtimeArgs": ["-m", "http.server", "4173", "--directory", "/Users/mollyqian/Desktop/infinite exploration"],
       "port": 4173
     }
   ]
