@@ -15,7 +15,7 @@ This repo is `mollyyqiann.github.io`, so whatever sits at the repo root is serve
 | Contact | `contact.html` |
 
 Shared code lives in `assets/`:
-- `style.css` — all page styling (Option 2 palette: cool black + blue, `--bg:#06080b`, `--accent:#3d8bfd`), reveal/parallax/Ken Burns effects, `.soft-bg-section`/`.float-img` background-photo + floating-accent patterns.
+- `style.css` — all page styling (Option 2 palette: cool black + blue, `--bg:#06080b`, `--accent:#3d8bfd`), reveal/parallax/Ken Burns effects, `.soft-bg-section` background-photo pattern.
 - `script.js` — scroll-reveal (IntersectionObserver), parallax scroll handler, contact form submit handler (static — see Open Items below).
 
 Pages reference their imagery via `images/d6-*` (root-level `images/` folder — copies of the same files that live in `designs/images/`, kept in sync manually since `designs/design-6-turion-inspired.html` still references the `designs/images/` copies).

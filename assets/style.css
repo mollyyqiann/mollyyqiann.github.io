@@ -116,26 +116,6 @@ h1 .accent{color:var(--accent);}
 .soft-bg-overlay{position:absolute;inset:0;background:rgba(6,8,11,0.82);}
 .soft-bg-inner{position:relative;z-index:1;}
 
-/* small floating accent renders — wrapper carries the scroll-parallax
-   transform, inner img carries the idle bob animation, so the two
-   transforms don't fight over the same element */
-.float-wrap{
-  position:absolute;pointer-events:none;z-index:2;
-  will-change:transform;
-}
-.float-img{
-  display:block;
-  filter:drop-shadow(0 20px 26px rgba(0,0,0,0.55));
-  animation:floaty 7s ease-in-out infinite;
-}
-@keyframes floaty{
-  0%,100%{transform:translateY(0px);}
-  50%{transform:translateY(-18px);}
-}
-@media (max-width:900px){
-  .float-wrap{display:none;}
-}
-
 section{padding:120px 0;}
 .section-head{max-width:680px;margin:0 0 56px;}
 .section-tag{font-family:var(--font-mono);font-size:12px;text-transform:uppercase;letter-spacing:0.1em;color:var(--accent);margin-bottom:14px;}
@@ -349,7 +329,7 @@ footer{border-top:1px solid var(--line);padding:56px 0 40px;color:var(--text-dim
   .reveal, .reveal-stagger > *,
   .hero-bg, .hero-bg-img, .banner-bg, .banner-bg-img,
   .statband-bg, .statband-bg-img, .ops-bg, .ops-bg-img, .quote-bg, .quote-bg-img,
-  .soft-bg, .soft-bg-img, .float-wrap, .float-img, .statcard{
+  .soft-bg, .soft-bg-img, .statcard{
     opacity:1!important;transform:none!important;animation:none!important;transition:none!important;
   }
 }
