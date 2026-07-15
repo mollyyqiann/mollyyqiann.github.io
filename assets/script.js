@@ -35,6 +35,33 @@
     updateParallax();
   }
 
+  // stat band card alignment — while .statband-pin is stuck, scroll progress
+  // eases each card from its data-align-offset stagger down to 0, so the row
+  // lines up partway through the pin and holds there until the section
+  // releases. Mobile CSS forces transform:none, so this is desktop-only.
+  var statband = document.querySelector('.statband');
+  if(statband && !reduced){
+    var alignCards = statband.querySelectorAll('.statcard[data-align-offset]');
+    var stackTicking = false;
+    function updateStatband(){
+      var scrollable = statband.offsetHeight - window.innerHeight;
+      if(scrollable > 0){
+        var p = Math.min(1, Math.max(0, -statband.getBoundingClientRect().top / scrollable));
+        var t = Math.min(1, p / 0.55);
+        t = 1 - Math.pow(1 - t, 3);
+        alignCards.forEach(function(c){
+          var start = parseFloat(c.getAttribute('data-align-offset')) || 0;
+          c.style.transform = 'translateY(' + (start * (1 - t)) + 'px)';
+        });
+      }
+      stackTicking = false;
+    }
+    window.addEventListener('scroll', function(){
+      if(!stackTicking){ requestAnimationFrame(updateStatband); stackTicking = true; }
+    }, {passive:true});
+    updateStatband();
+  }
+
   var contactForm = document.getElementById('contact-form');
   if(contactForm){
     contactForm.addEventListener('submit', function(e){
